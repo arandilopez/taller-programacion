@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['id'])) {
+  header('Location: http://localhost:8080/index.php');
+}
+?>
 <?php require __DIR__.'/system/partials/header.php'; ?>
 
 <div class="container">

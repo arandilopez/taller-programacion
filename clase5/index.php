@@ -1,5 +1,7 @@
 <?php
   session_start();
+
+  require __DIR__.'/system/actions/productos/listar.php';
 ?>
 <?php require __DIR__.'/system/partials/header.php'; ?>
 
@@ -34,6 +36,12 @@
             <li><a href="contact.php">Contacto</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">
+                  <i class="glyphicon glyphicon-shopping-cart" style="font-size: 18px;"></i>
+                  <span class="label label-danger"></span>
+              </a>
+            </li>
             <?php if ( isset($_SESSION['nombre']) ): ?>
               <li><a href="system/actions/logout.php">Cerrar sesión</a></li>
             <?php else: ?>
@@ -45,21 +53,27 @@
     </nav>
 
     <div class="row">
-      <?php for ($i=0; $i < 5; $i++):?>
-        <div class="col-md-3 col-sm-4">
-          <div class="thumbnail">
-            <img src="http://lorempixel.com/400/400" alt="...">
-            <div class="caption">
-              <h3>Elemento <?php echo ($i + 1); ?></h3>
-              <p>...</p>
-              <p>
-                <a href="#" class="btn btn-primary" role="button">Button</a>
-                <a href="#" class="btn btn-default" role="button">Button</a>
-              </p>
-            </div>
+      <?php foreach($productos as $producto): ?>
+      <div class="col-md-3 col-sm-4">
+        <div class="thumbnail">
+          <img src="http://lorempixel.com/400/400" alt="...">
+          <div class="caption">
+            <h3>
+              <?php echo $producto['nombre']; ?>
+            </h3>
+            <h4><span class="text-success"><?php echo "$ ".$producto['precio']; ?></span></h4>
+            <p><?php echo $producto['descripcion'] ?></p>
+
+            <p>
+              <button type="button" name="comprar" class="btn btn-primary button-comprar" data-producto-id="<?php echo $producto['id']; ?>">Comprar</button>
+              <?php if (isset($_SESSION['id'])):?>
+              <a href="http://localhost:8080/editar-producto.php?id=<?php echo $producto['id']; ?>" class="btn btn-default" role="button">Editar</a>
+              <?php endif; ?>
+            </p>
           </div>
         </div>
-      <?php endfor ?>
+      </div>
+    <?php endforeach; ?>
     </div>
   </div>
   <?php require __DIR__.'/system/partials/footer.php'; ?>
