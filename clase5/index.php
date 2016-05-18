@@ -37,9 +37,9 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">
+              <a href="/mis-compras.php">
                   <i class="glyphicon glyphicon-shopping-cart" style="font-size: 18px;"></i>
-                  <span class="label label-danger"></span>
+                  <span class="label label-danger" id="numero_compras"></span>
               </a>
             </li>
             <?php if ( isset($_SESSION['nombre']) ): ?>
@@ -76,4 +76,6 @@
     <?php endforeach; ?>
     </div>
   </div>
+  <?php require __DIR__.'/system/partials/scripts.php'; ?>
+  <script src="/scripts/comprar.js" charset="utf-8"></script>
   <?php require __DIR__.'/system/partials/footer.php'; ?>
